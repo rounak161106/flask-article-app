@@ -50,12 +50,11 @@ def create_author():
 
 @app.route("/add", methods=["POST"])
 def add():
-    author_id = request.form.get("author")
+    author_name = request.form.get("author")
     title = request.form.get("title")
     content = request.form.get("content")
     # 1. Get author from DB
-    author = Author.query.get(author_id)
-
+    author = Author.query.filter_by(name = author_name).first()
     if not author:
         return "Author not found"
 
