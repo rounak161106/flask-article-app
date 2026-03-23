@@ -82,4 +82,4 @@ def add_author():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

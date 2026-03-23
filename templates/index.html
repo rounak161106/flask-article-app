@@ -12,15 +12,24 @@
             font-size: 22px;
             color: #0d6efd; /* bootstrap blue */
         }
+        .header{
+            display: flex;
+            justify-content: space-between;
+        }
      </style>
     <body>
         <div class="container">
-            <div class="Jombotron" >
-                <h1 class="header-4" style="text-decoration: underline;"> All Articles   </h1><br>
+            <div class="header">
+                <div class="Jombotron" >
+                    <h1 class="header-4" style="text-decoration: underline;"> All Articles   </h1><br>
+                </div>
+                <div class="col-md-4" style="margin-top: 8px; margin-right: 10px;">
+                    <a href="/create" class="btn btn-primary">Add Articles</a>
+                    <a href="/create_author" class="btn btn-primary">Add Author</a>
+                </div>
             </div>
-
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-10">
                 <ol class="ps-3">
                     {% for i in articles %}
                         <li class="mb-4">
@@ -41,13 +50,10 @@
                         </li>
                     {% endfor %}
                 </ol>
-                </div>
-            
-                <div class="col-md-4">
-                    <a href="/create" class="btn btn-primary">Add Articles</a>
-                    <a href="/create_author" class="btn btn-primary">Add Author</a>
-                </div>
             </div>
+            
+            
+        </div>
         </div>
     </body>
 </html>
