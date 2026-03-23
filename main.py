@@ -1,9 +1,12 @@
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
+import os
 
+path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///testdb.sqlite3"
-db = SQLAlchemy(app)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(path, "testdb.sqlite3")
+db = SQLAlchemy()
+db.init_app(app)
 app.app_context().push()
 
 class Author(db.Model):
@@ -49,9 +52,7 @@ def add():
     title = request.form.get("title")
     content = request.form.get("content")
     # 1. Get author from DB
-    print(author_name)
     author = Author.query.filter_by(name = author_name).first()
-    print(author)
     if not author:
         return "Author not found"
 
