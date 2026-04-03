@@ -21,7 +21,7 @@
         <div class="container">
             <div class="header">
                 <div class="Jombotron" >
-                    <h1 class="header-4" style="text-decoration: underline;"> All Articles   </h1><br>
+                    <h1 class="header-4" style="text-decoration: underline;"> Search Results   </h1><br>
                 </div>
                 <div class="col-md-4" style="margin-top: 8px; margin-right: 10px;">
                     <a href="/create" class="btn btn-primary">Add Articles</a>
@@ -34,18 +34,12 @@
                     {% for i in articles %}
                         <li class="mb-4">
                             <h4 class="fw-bold">{{ i.title }}</h4>
-
                             <p class="mb-1">
                                 <strong>Written by:</strong>
                                 {% for author in i.authors %}
                                     <a href="/article_by/{{ author.name }}">{{ author.name }}</a>{% if not loop.last %}, {% endif %}
                                 {% endfor %}
                             </p>
-
-                            <p>
-                                <strong>Content:</strong> {{ i.content }}
-                            </p>
-
                             <hr>
                         </li>
                     {% endfor %}
