@@ -77,6 +77,12 @@ def add_author():
     db.session.commit()
     return redirect("/")
 
+@app.route('/search')
+def search():
+    query = request.args.get('q', '')
+    articles = Article.query.filter(Article.content.like(f'%{query}%')).all()
+    return render_template('search_results.html', articles=articles, query=query)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
