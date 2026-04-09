@@ -80,9 +80,7 @@ def add_author():
 @app.route('/search')
 def search():
     query = request.args.get('q', '')
-    print(query)
     articles = Article.query.filter(Article.content.like(f'%{query}%')).all()
-    print(articles)
     return render_template('search_results.html', articles=articles, query=query)
 
 
