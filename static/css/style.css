@@ -1,11 +1,10 @@
-#like{
+.rating{
     padding: 3px;
-    background-color: rgb(52, 52, 228);
     display: inline-block;
-    color: white;
+    border: 1px solid black;
     border-radius: 3px;
 }
 
-#like:hover{
+.rating:hover{
     cursor: pointer;
 }   

@@ -7,7 +7,12 @@ function validate(event){
     }
     return true
 }       
-
+function send_rating(event) {
+    alert("Rating sent")
+}
 function like(){
-    alert("LIked")
+    let ratings = document.querySelectorAll(".rating")
+    for(const rating of ratings){
+        rating.onclick = send_rating;
+    }
 }
