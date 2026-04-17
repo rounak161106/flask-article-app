@@ -83,6 +83,13 @@ def search():
     articles = Article.query.filter(Article.content.like(f'%{query}%')).all()
     return render_template('search_results.html', articles=articles, query=query)
 
+@app.route('/feedback', methods = ["GET", "POST"])
+def feedback():
+    if request.method == "POST":
+        feedback = request.form.get("feedback")
+        return render_template("thank.html")
+    
+    return render_template("feedback.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
