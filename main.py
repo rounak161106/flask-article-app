@@ -91,5 +91,12 @@ def feedback():
     
     return render_template("feedback.html")
 
+
+@app.route('/article/rating/<int:id>')
+def rating(id):
+    article_id = Article.query.get(id)
+    print(f"Article with id {article_id} was clicked")
+    return "OKK", 200
+
 if __name__ == "__main__":
     app.run(debug=True)
