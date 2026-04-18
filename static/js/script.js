@@ -7,13 +7,19 @@ function validate(event){
     }
     return true
 }       
+
+function show_thankyou(article, response){
+    var div = document.createElement('div');
+    div.class="message";
+    div.innerHTML="<i>Thank you for liking</i>"
+    article.appendChild(div)
+}
+
 function send_rating(event) {
-    alert("Rating sent")
     article = event.target
     article_id = article.dataset.article_id
-    console.log(article_id)
-    fetch("article/rating/"+article_id).then(
-        response => alert(response)
+    fetch("/article/rating/"+article_id).then(
+        response => show_thankyou(article, response)
     ).catch(    
         err => console.log(err)
     )
