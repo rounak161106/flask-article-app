@@ -10,16 +10,16 @@ db = SQLAlchemy()
 db.init_app(app)
 app.app_context().push()
 
-login_manager = LoginManager
+login_manager = LoginManager()
 login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(id)
 
-class User:
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    user_name = db.Column(db.String, nullable = False, unique = True)
+    username = db.Column(db.String, nullable = False, unique = True)
     password = db.Column(db.String, nullable = False)
 
 class Author(db.Model):
@@ -40,7 +40,25 @@ class ArticleAuthor(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey("authors.author_id"), primary_key=True, nullable=False)
     article_id = db.Column(db.Integer, db.ForeignKey("articles.article_id"), primary_key=True, nullable=False)
 
-@app.route('/')
+@app.route("/", methods = ["GET", "POST"])
+def login():
+    if request.methods == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        user = User.query.filter_by(username = username).first()
+        if user:
+            if user.password == password:
+                login_user(user)
+                return redirect('/articles')
+            else:
+                return "Invalid password"
+        else:
+            return "Username not found!!!"
+        
+    return render_template("login.html")
+
+
+@app.route('/articles')
 def main():
     articles = Article.query.all() #or db.session.query(Article).all()
     return render_template("index.html", articles= articles)
