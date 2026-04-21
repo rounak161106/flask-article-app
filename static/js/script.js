@@ -1,12 +1,3 @@
-function validate(event){
-    v = document.getElementById("feedback").value;
-    if(v.indexOf('x') == -1 ){
-        event.preventDefault();
-        alert("Feedback can't be empty")
-        return false
-    }
-    return true
-}       
 
 function show_thankyou(article, response){
     var div = document.createElement('div');
