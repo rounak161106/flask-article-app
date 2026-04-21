@@ -10,6 +10,8 @@ db = SQLAlchemy()
 db.init_app(app)
 app.app_context().push()
 
+app.config["SECRET_KEY"] = "thisisasecretkey"
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
