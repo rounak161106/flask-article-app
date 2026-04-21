@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        .container{
+            width: 300px;
+            margin: 0 auto;
+            border: 2px solid black;
+            padding: 10px;
+            margin-top: 150px;
+        }
+        .signup{
+            margin-left: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome back!!</h1>
+        <form action="/login" method = "POST">
+            <label for="username">Username : </label>
+            <input type="text" id = "username" name="username" required>
+            <br><br>
+            <label for="password">Password : </label>
+            <input type="text" id = "password" name="password" required>
+            <br><br>
+            <div class="login_btn">
+                <span class="submit"><input type="submit" value="Sign Up"></span>
+                <span class="signup"><a href="/login">Login</a></span>
+            </div> 
+        </form>
+    </div>
+</body>
+</html>
