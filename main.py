@@ -114,7 +114,7 @@ def add():
     db.session.add(new_article)
     db.session.commit()
 
-    return redirect("/")
+    return redirect("/articles")
 
 @app.route("/add_author", methods=["POST"])
 @login_required
@@ -124,7 +124,7 @@ def add_author():
     new_author = Author(name=name, email=email)
     db.session.add(new_author)
     db.session.commit()
-    return redirect("/")
+    return redirect("/articles")
 
 @app.route('/search')
 @login_required
