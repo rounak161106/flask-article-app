@@ -9,6 +9,9 @@ db = SQLAlchemy()
 db.init_app(app)
 app.app_context().push()
 
+class Login:
+    user_name = db.Column(db.String, nullable = False)
+
 class Author(db.Model):
     __tablename__ = "authors"
     author_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
