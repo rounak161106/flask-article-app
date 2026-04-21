@@ -1,4 +1,6 @@
-
+function signedup(){
+    alert("Signup Successful. Kindly Login")
+}
 function show_thankyou(article, response){
     var div = document.createElement('div');
     div.class="message";

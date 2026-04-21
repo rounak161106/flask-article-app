@@ -64,10 +64,14 @@ def signup():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        user = User(username = username, password = password)
-        db.session.add(user)
-        db.session.commit()
-        return render_template("login.html")
+        this_user = User.query.filter_by(username = username).first()
+        if not this_user:
+            user = User(username = username, password = password)
+            db.session.add(user)
+            db.session.commit()
+            return render_template("login.html")
+        else:
+            return "Username already exists. Try again with different username"
          
     return render_template("signup.html")
 
