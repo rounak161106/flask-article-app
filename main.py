@@ -42,7 +42,7 @@ class ArticleAuthor(db.Model):
 
 @app.route("/", methods = ["GET", "POST"])
 def login():
-    if request.methods == "POST":
+    if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
         user = User.query.filter_by(username = username).first()
@@ -56,6 +56,18 @@ def login():
             return "Username not found!!!"
         
     return render_template("login.html")
+
+@app.route("/signup", methods = ["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        user = User(username = username, password = password)
+        db.session.add(user)
+        db.session.commit()
+        return render_template("login.html")
+         
+    return render_template("signup.html")
 
 
 @app.route('/articles')
