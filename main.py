@@ -69,26 +69,29 @@ def signup():
          
     return render_template("signup.html")
 
-
+@login_required
 @app.route('/articles')
 def main():
     articles = Article.query.all() #or db.session.query(Article).all()
     return render_template("index.html", articles= articles)
 
+@login_required
 @app.route("/article_by/<user_name>")
 def article_by(user_name):
     articles = Article.query.filter(Article.authors.any(name = user_name))
     return render_template("article_by.html", articles = articles, author = user_name)
 
+@login_required
 @app.route("/create", methods=["GET"])
 def create():
     return render_template("create.html")
 
+@login_required
 @app.route("/create_author", methods=["GET"])
 def create_author():
     return render_template("create_author.html")
 
-
+@login_required
 @app.route("/add", methods=["POST"])
 def add():
     author_name = request.form.get("author").strip()
@@ -111,6 +114,7 @@ def add():
 
     return redirect("/")
 
+@login_required
 @app.route("/add_author", methods=["POST"])
 def add_author():
     name = request.form.get("name")
@@ -120,12 +124,14 @@ def add_author():
     db.session.commit()
     return redirect("/")
 
+@login_required
 @app.route('/search')
 def search():
     query = request.args.get('q', '')
     articles = Article.query.filter(Article.content.like(f'%{query}%')).all()
     return render_template('search_results.html', articles=articles, query=query)
 
+@login_required
 @app.route('/feedback', methods = ["GET", "POST"])
 def feedback():
     if request.method == "POST":
@@ -135,6 +141,7 @@ def feedback():
     return render_template("feedback.html")
 
 
+@login_required
 @app.route('/article/rating/<int:id>')
 def rating(id):
     article_id = Article.query.get(id)
