@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
+from flask_login import LoginManager, login_user, current_user, logout_user, UserMixin, login_required
 
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -9,8 +10,17 @@ db = SQLAlchemy()
 db.init_app(app)
 app.app_context().push()
 
-class Login:
-    user_name = db.Column(db.String, nullable = False)
+login_manager = LoginManager
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(id)
+
+class User:
+    id = db.Column(db.Integer, primary_key = True)
+    user_name = db.Column(db.String, nullable = False, unique = True)
+    password = db.Column(db.String, nullable = False)
 
 class Author(db.Model):
     __tablename__ = "authors"
