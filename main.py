@@ -10,7 +10,7 @@ db = SQLAlchemy()
 db.init_app(app)
 app.app_context().push()
 
-app.config["SECRET_KEY"] = "thisisasecretkey"
+app.config["SECRET_KEY"] = "thisissecretkey"
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -71,30 +71,30 @@ def signup():
          
     return render_template("signup.html")
 
-@login_required
 @app.route('/articles')
+@login_required
 def main():
     articles = Article.query.all() #or db.session.query(Article).all()
     return render_template("index.html", articles= articles)
 
-@login_required
 @app.route("/article_by/<user_name>")
+@login_required
 def article_by(user_name):
     articles = Article.query.filter(Article.authors.any(name = user_name))
     return render_template("article_by.html", articles = articles, author = user_name)
 
-@login_required
 @app.route("/create", methods=["GET"])
+@login_required
 def create():
     return render_template("create.html")
 
-@login_required
 @app.route("/create_author", methods=["GET"])
+@login_required
 def create_author():
     return render_template("create_author.html")
 
-@login_required
 @app.route("/add", methods=["POST"])
+@login_required
 def add():
     author_name = request.form.get("author").strip()
     title = request.form.get("title")
@@ -116,8 +116,8 @@ def add():
 
     return redirect("/")
 
-@login_required
 @app.route("/add_author", methods=["POST"])
+@login_required
 def add_author():
     name = request.form.get("name")
     email = request.form.get("email")
@@ -126,15 +126,15 @@ def add_author():
     db.session.commit()
     return redirect("/")
 
-@login_required
 @app.route('/search')
+@login_required
 def search():
     query = request.args.get('q', '')
     articles = Article.query.filter(Article.content.like(f'%{query}%')).all()
     return render_template('search_results.html', articles=articles, query=query)
 
-@login_required
 @app.route('/feedback', methods = ["GET", "POST"])
+@login_required
 def feedback():
     if request.method == "POST":
         feedback = request.form.get("feedback")
@@ -143,12 +143,18 @@ def feedback():
     return render_template("feedback.html")
 
 
-@login_required
 @app.route('/article/rating/<int:id>')
+@login_required
 def rating(id):
     article_id = Article.query.get(id)
     print(f"Article with id {article_id} was clicked")
     return "OKK", 200
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('login.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
