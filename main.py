@@ -8,10 +8,17 @@ load_dotenv()
 
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///" + os.path.join(path, "testdb.sqlite3"))
+
+db_url = os.getenv("DATABASE_URL")
+print("DB URL:", db_url)
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+
 db = SQLAlchemy()
 db.init_app(app)
-app.app_context().push()
+
 
 app.config["SECRET_KEY"] = "thisissecretkey"
 
@@ -23,6 +30,7 @@ def load_user(id):
     return User.query.get(id)
 
 class User(UserMixin, db.Model):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, nullable = False, unique = True)
     password = db.Column(db.String, nullable = False)
