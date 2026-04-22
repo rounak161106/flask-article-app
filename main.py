@@ -2,10 +2,13 @@ from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager, login_user, current_user, logout_user, UserMixin, login_required
+from dotenv import load_dotenv
+load_dotenv()
+
 
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(path, "testdb.sqlite3")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///" + os.path.join(path, "testdb.sqlite3"))
 db = SQLAlchemy()
 db.init_app(app)
 app.app_context().push()
