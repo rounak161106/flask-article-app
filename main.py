@@ -89,7 +89,7 @@ def signup():
 @login_required
 def main():
     articles = Article.query.all() #or db.session.query(Article).all()
-    return render_template("index.html", articles= articles)
+    return render_template("index.html", articles= articles[::-1])
 
 @app.route("/article_by/<user_name>")
 @login_required

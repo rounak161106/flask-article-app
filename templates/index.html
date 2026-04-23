@@ -43,14 +43,13 @@
                                 <strong>Written by:</strong>
                                 {% for author in i.authors %}
                                     <a href="/article_by/{{ author.name }}">{{ author.name }}</a>{% if not loop.last %}, {% endif %}
-                                {% endfor %}
+                                {% endfor %} on {{ time }}
                             </p>
 
                             <p>
                                 <strong>Content:</strong> {{ i.content }}
                             </p>
-                            <p class="rating" data-article_id="{{i.article_id}}">Like<i class="bi bi-hand-thumbs-up-fill"></i></p>
-                            <hr>
+                                <hr>
                         </li>
                     {% endfor %}
                 </ol>
