@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
+import pytz
 from flask_login import LoginManager, login_user, current_user, logout_user, UserMixin, login_required
 from datetime import datetime
 from dotenv import load_dotenv
@@ -116,7 +117,8 @@ def add():
     author_name = request.form.get("author").strip()
     title = request.form.get("title")
     content = request.form.get("content")
-    created_on = datetime.now().strftime("%d/%m/%y at %H:%M")
+    ist = pytz.timezone('Asia/Kolkata')
+    created_on = datetime.now(ist).strftime("%d/%m/%y at %H:%M")
     # 1. Get author from DB
     author = Author.query.filter_by(name = author_name).first()
     if not author:
