@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 import pytz
-from flask_login import LoginManager, login_user, current_user, logout_user, UserMixin, login_required
+from flask_login import LoginManager, login_user, logout_user, UserMixin, login_required
 from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
