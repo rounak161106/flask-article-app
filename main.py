@@ -85,7 +85,7 @@ def signup():
             db.session.commit()
             return render_template("login.html")
         else:
-            return "Username already exists. Try again with different username"
+            return 'Username already exists. <a href = "/signup">Try again</a> with different username.'
          
     return render_template("signup.html")
 
