@@ -1,6 +1,6 @@
 # Flask Article App
 
-A simple web application built with Flask that allows users to create authors and publish articles linked to them. Live demo is deployed on Render. Create an account, add authors, and publish articles to see how it works!
+A simple web application built with Flask that allows users to create authors and publish articles linked to them. Live demo is deployed on Render. Create an account, add authors, and publish articles to see how it works!!
 
 🔗 **Live Demo:** [flask-article-app.onrender.com](https://flask-article-app.onrender.com)
 
